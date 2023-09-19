@@ -44,6 +44,14 @@ function onDataReceived(text) {
   else if(text === 'help'){
     help();
   }
+  else if(text.startsWith('check')) {
+    const index = text.split(' ')[1];
+    checkTask(index);
+  }
+  else if(text.startsWith('uncheck')) {
+    const index = text.split(' ')[1];
+    uncheckTask(index);
+  }
   else if (text === 'list\n') {
     list();
   }
@@ -116,6 +124,38 @@ function listTasks() {
       const mark = tasks[i].done ? "[✓]" : "[ ]";
       console.log(`${i + 1}. ${mark} ${tasks[i].description}`);
     }
+  }
+}
+function checkTask(index) {
+  if (!index) {
+    console.log("Error: No task Number!!!!!");
+    return;
+  }
+
+  index = Number(index) - 1;
+
+  if (index >= 0 && index < tasks.length) {
+    tasks[index].done = true;
+    console.log(`Checked task: "${tasks[index].description}"`);
+  } else {
+    console.log("Error: the task number is invaild!");
+  }
+}
+
+
+function uncheckTask(index) {
+  if (!index) {
+    console.log("Error: No Task Number!!!");
+    return;
+  }
+
+  index = Number(index) - 1;
+
+  if (index >= 0 && index < tasks.length) {
+    tasks[index].done = false;
+    console.log(`Unchecked task: "${tasks[index].description}"`);
+  } else {
+    console.log("Error:the task number is invaild!");
   }
 }
 function addTask(task) {
