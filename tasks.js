@@ -34,15 +34,13 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === 'quit\n') {
+  if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
   else if(text === 'help\n'){
     help();
   }
-  else if(text === 'exit\n'){
-exit();
-  }
+ 
   else if(text === 'hello\n'){
     hello();
   }
@@ -70,7 +68,7 @@ function unknownCommand(c){
  * @returns {void}
  */
 function hello(){
-  console.log('Hey How are you!')
+  console.log('Hello')
 }
 
 
@@ -80,14 +78,10 @@ function hello(){
  * @returns {void}
  */
 function quit(){
-  console.log('Goodbye, have a good day!!')
+  console.log('Quitting now, goodbye!')
   process.exit();
 }
 
-function exit(){
-  console.log('Have a nice day goodbye!!')
-  process.exit();
-}
 // the help function show all the commands in the app 
 function help(){
   console.log('list of commands: hello \n quit \n exit \n help \n')
