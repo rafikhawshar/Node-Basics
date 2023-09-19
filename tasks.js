@@ -176,6 +176,10 @@ function help(){
   console.log('  list - Lists all tasks with task numbers');
   console.log('  add [task_description] - Adds a new task');
   console.log('  remove [task_number] - Removes a task by its number or the last task if no number is provided'); 
+  console.log('  edit [number] [new_text] - Edits a task');
+  console.log('  check [number]    - Marks a task as done');
+  console.log('  uncheck [number]  - Marks a task as not done');
+
 }
 const tasks = [
   { task: "Hunting", done: false },
