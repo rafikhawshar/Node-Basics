@@ -44,10 +44,15 @@ function onDataReceived(text) {
   else if(text === 'help'){
     help();
   }
- 
+  else if (text === 'list\n') {
+    list();
+  }
   else if(text.startsWith('hello')) {
     const args = text.split(' ').slice(1).join(' '); // Extract argument
     hello(args);
+  }
+  else if(text === 'list') {
+    listTasks();
   }
   else{
     unknownCommand(text);
@@ -90,6 +95,16 @@ function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
 }
+function listTasks(){
+  if(tasks.length === 0) {
+    console.log("there arent any tasks");
+  } else {
+    for(let i = 0; i < tasks.length; i++) {
+      console.log(`${i+1}. ${tasks[i]}`);
+    }
+  }
+}
+  
 
 // the help function show all the commands in the app 
 function help(){
@@ -98,6 +113,17 @@ function help(){
   console.log('  quit - Exits the application');
   console.log('  exit - Exits the application');
   console.log('  help - Shows the list of commands');
+}
+const tasks = [
+  "Hunting",
+  "Swimming",
+  "Write code"
+];
+function list(){
+  console.log('The Tasks Are:') ;
+  tasks.forEach((tasks , index) => {
+    console.log(`${index + 1}: ${tasks}`)
+  });
 }
 // The following line starts the application
 startApp("Rafik Hawshar")
