@@ -58,6 +58,9 @@ function onDataReceived(text) {
     const task = text.split(' ').slice(1).join(' ');
     addTask(task);
   }
+  else if(text.startsWith('remove')) {
+    const index = text.split(' ')[1]; 
+    removeTask(index);}
   else{
     unknownCommand(text);
   }
@@ -135,6 +138,25 @@ function list(){
   tasks.forEach((tasks , index) => {
     console.log(`${index + 1}: ${tasks}`)
   });
+}
+function removeTask(index){
+  if(tasks.length === 0) {
+    console.log("No tasks to remove.");
+    return;
+  }
+
+  if(!index) {
+    tasks.pop();
+    console.log("Removed the last task.");
+  } else {
+    index = Number(index) - 1; // Convert to zero-based index
+    if(index >= 0 && index < tasks.length) {
+      const removed = tasks.splice(index, 1);
+      console.log(`Removed task: "${removed[0]}"`);
+    } else {
+      console.log("Invalid task number.");
+    }
+  }
 }
 // The following line starts the application
 startApp("Rafik Hawshar")
