@@ -127,6 +127,9 @@ function help(){
   console.log('  quit - Exits the application');
   console.log('  exit - Exits the application');
   console.log('  help - Shows the list of commands');
+  console.log('  list - Lists all tasks with task numbers');
+  console.log('  add [task_description] - Adds a new task');
+  console.log('  remove [task_number] - Removes a task by its number or the last task if no number is provided'); 
 }
 const tasks = [
   "Hunting",
