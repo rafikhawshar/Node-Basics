@@ -64,7 +64,7 @@ function unknownCommand(c){
  * @returns {void}
  */
 function hello(){
-  console.log('hello!')
+  console.log('Hey How are you!')
 }
 
 
@@ -74,7 +74,7 @@ function hello(){
  * @returns {void}
  */
 function quit(){
-  console.log('Quitting now, goodbye!')
+  console.log('Goodbye, have a good day!!')
   process.exit();
 }
 
