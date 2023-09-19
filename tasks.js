@@ -108,24 +108,24 @@ function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
 }
-function listTasks(){
-  if(tasks.length === 0) {
-    console.log("there arent any tasks");
+function listTasks() {
+  if (tasks.length === 0) {
+    console.log("There aren't any tasks.");
   } else {
-    for(let i = 0; i < tasks.length; i++) {
-      console.log(`${i+1}. ${tasks[i]}`);
+    for (let i = 0; i < tasks.length; i++) {
+      const mark = tasks[i].done ? "[✓]" : "[ ]";
+      console.log(`${i + 1}. ${mark} ${tasks[i].description}`);
     }
   }
 }
-function addTask(task){
-  if(task === "") {
-    console.log("Error: You should Enter a task");
+function addTask(task) {
+  if (task === "") {
+    console.log("Error: You should Enter a task.");
   } else {
-    tasks.push(task);
+    tasks.push({ description: task, done: false });
     console.log(`Added task: "${task}"`);
   }
 }
-
 // the help function show all the commands in the app 
 function help(){
   console.log('List of commands:');
@@ -138,9 +138,9 @@ function help(){
   console.log('  remove [task_number] - Removes a task by its number or the last task if no number is provided'); 
 }
 const tasks = [
-  "Hunting",
-  "Swimming",
-  "Write code"
+  { task: "Hunting", done: false },
+  { task: "Swimming", done: true },
+  { task: "Write code", done: false }
 ];
 function list(){
   console.log('The Tasks Are:') ;
@@ -155,16 +155,16 @@ function removeTask(index){
     return;
   }
 
-  if(!index) {
+  if (!index) {
     tasks.pop();
     console.log("Removed the last task.");
   } else {
-    index = Number(index) - 1; 
-    if(index >= 0 && index < tasks.length) {
+    index = Number(index) - 1;
+    if (index >= 0 && index < tasks.length) {
       const removed = tasks.splice(index, 1);
-      console.log(`Removed task: "${removed[0]}"`);
+      console.log(`Removed task: "${removed[0].description}"`);
     } else {
-      console.log("wrong task number: task does not exist."); 
+      console.log("Wrong task number: Task does not exist.");
     }
   }
 }
@@ -174,18 +174,20 @@ function editTask(index, newText){
     return;
   }
 
-  if(index === undefined) {
-    tasks[tasks.length - 1] = newText;
+  if (index === undefined) {
+    tasks[tasks.length - 1].description = newText;
     console.log(`Edited the last task to: "${newText}"`);
   } else {
-    index = index - 1; 
-    if(index >= 0 && index < tasks.length) {
-      tasks[index] = newText;
-      console.log(`Edited the task ${index + 1} to: "${newText}"`);
+    index = Number(index) - 1;
+    if (index >= 0 && index < tasks.length) {
+      tasks[index].description = newText;
+      console.log(`Edited task ${index + 1} to: "${newText}"`);
     } else {
-      console.log("There is no such a number: Task does not exist.");
+      console.log("There is no such number: Task does not exist.");
     }
   }
 }
+
+
 // The following line starts the application
 startApp("Rafik Hawshar")
