@@ -61,6 +61,12 @@ function onDataReceived(text) {
   else if(text.startsWith('remove')) {
     const index = text.split(' ')[1]; 
     removeTask(index);}
+    else if(text.startsWith('edit')) {
+      const parts = text.split(' ').slice(1); // Extract the parts after 'edit'
+      const index = isNaN(Number(parts[0])) ? null : Number(parts[0]);
+      const newText = isNaN(Number(parts[0])) ? parts.join(' ') : parts.slice(1).join(' ');
+      editTask(index, newText);
+    }
   else{
     unknownCommand(text);
   }
@@ -159,6 +165,25 @@ function removeTask(index){
       console.log(`Removed task: "${removed[0]}"`);
     } else {
       console.log("wrong task number: task does not exist."); 
+    }
+  }
+}
+function editTask(index, newText){
+  if(!newText) {
+    console.log("Error: You didnt provide anything.");
+    return;
+  }
+
+  if(index === undefined) {
+    tasks[tasks.length - 1] = newText;
+    console.log(`Edited the last task to: "${newText}"`);
+  } else {
+    index = index - 1; 
+    if(index >= 0 && index < tasks.length) {
+      tasks[index] = newText;
+      console.log(`Edited the task ${index + 1} to: "${newText}"`);
+    } else {
+      console.log("There is no such a number: Task does not exist.");
     }
   }
 }
