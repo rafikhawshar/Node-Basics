@@ -34,15 +34,20 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === 'quit\n' || text === 'exit\n') {
+  
+
+  text = text.trim().replace('\n', ''); // Modify the text variable to remove the endline and additional space
+
+  if (text === 'quit' || text === 'exit') {
     quit();
   }
-  else if(text === 'help\n'){
+  else if(text === 'help'){
     help();
   }
  
-  else if(text === 'hello\n'){
-    hello();
+  else if(text.startsWith('hello')) {
+    const args = text.split(' ').slice(1).join(' '); // Extract argument
+    hello(args);
   }
   else{
     unknownCommand(text);
@@ -67,8 +72,12 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('Hello')
+function hello(args){
+  if (args) {
+    console.log(`Hello ${args}!`);
+  } else {
+    console.log('Hello');
+  }
 }
 
 
