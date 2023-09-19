@@ -142,6 +142,7 @@ function list(){
     console.log(`${index + 1}: ${tasks}`)
   });
 }
+
 function removeTask(index){
   if(tasks.length === 0) {
     console.log("No tasks to remove.");
@@ -152,12 +153,12 @@ function removeTask(index){
     tasks.pop();
     console.log("Removed the last task.");
   } else {
-    index = Number(index) - 1; // Convert to zero-based index
+    index = Number(index) - 1; 
     if(index >= 0 && index < tasks.length) {
       const removed = tasks.splice(index, 1);
       console.log(`Removed task: "${removed[0]}"`);
     } else {
-      console.log("Invalid task number.");
+      console.log("wrong task number: task does not exist."); 
     }
   }
 }
