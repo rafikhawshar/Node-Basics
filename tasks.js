@@ -93,7 +93,11 @@ function quit(){
 
 // the help function show all the commands in the app 
 function help(){
-  console.log('list of commands: hello \n quit \n exit \n help \n')
-  }
+  console.log('List of commands:');
+  console.log('  hello [optional_argument] - Says "Hello" or "Hello [argument]!" if an argument is provided');
+  console.log('  quit - Exits the application');
+  console.log('  exit - Exits the application');
+  console.log('  help - Shows the list of commands');
+}
 // The following line starts the application
 startApp("Rafik Hawshar")
