@@ -88,7 +88,7 @@ function exit(){
   console.log('Have a nice day goodbye!!')
   process.exit();
 }
-
+// the help function show all the commands in the app 
 function help(){
   console.log('list of commands: hello \n quit \n exit \n help \n')
   }
