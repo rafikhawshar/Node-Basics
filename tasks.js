@@ -54,6 +54,10 @@ function onDataReceived(text) {
   else if(text === 'list') {
     listTasks();
   }
+  else if(text.startsWith('add')) {
+    const task = text.split(' ').slice(1).join(' ');
+    addTask(task);
+  }
   else{
     unknownCommand(text);
   }
@@ -104,7 +108,14 @@ function listTasks(){
     }
   }
 }
-  
+function addTask(task){
+  if(task === "") {
+    console.log("Error: You should Enter a task");
+  } else {
+    tasks.push(task);
+    console.log(`Added task: "${task}"`);
+  }
+}
 
 // the help function show all the commands in the app 
 function help(){
