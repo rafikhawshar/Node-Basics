@@ -76,7 +76,7 @@ function hello(args){
   if (args) {
     console.log(`Hello ${args}!`);
   } else {
-    console.log('Hello');
+    console.log('Hello!');
   }
 }
 
