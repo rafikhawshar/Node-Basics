@@ -181,11 +181,8 @@ function help(){
   console.log('  uncheck [number]  - Marks a task as not done');
 
 }
-const tasks = [
-  { task: "Hunting", done: false },
-  { task: "Swimming", done: true },
-  { task: "Write code", done: false }
-];
+const fs = require('fs');
+const tasks = loadingData('database.json'); 
 function list(){
   console.log('The Tasks Are:') ;
   tasks.forEach((tasks , index) => {
@@ -212,12 +209,27 @@ function removeTask(index){
     }
   }
 }
+function savingTheData(filename, tasks) {
+  fs.writeFileSync(filename, JSON.stringify(tasks, null, 2), 'utf-8');
+  console.log(`Data saved to ${filename}`);
+}
+function loadingData(filename) {
+  try {
+    const jsonData = fs.readFileSync(filename, 'utf-8');
+    const data = JSON.parse(jsonData);
+    console.log(`Data loaded from ${filename}`);
+    return data;
+  } catch (error) {
+    console.error(`Error loading data from ${filename}`);
+    return `error`;
+  }
+}
 function editTask(index, newText){
   if(!newText) {
     console.log("Error: You didnt provide anything.");
     return;
   }
-
+  savingTheData('database.json', tasks);
   if (index === undefined) {
     tasks[tasks.length - 1].description = newText;
     console.log(`Edited the last task to: "${newText}"`);
