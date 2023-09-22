@@ -113,6 +113,7 @@ function hello(args){
  * @returns {void}
  */
 function quit(){
+  savingTheData(filename, tasks);
   console.log('Quitting now, goodbye!')
   process.exit();
 }
@@ -182,7 +183,12 @@ function help(){
 
 }
 const fs = require('fs');
-const tasks = loadingData('database.json'); 
+let filename = "database.json"
+const fileNameEntered = process.argv.slice(2);
+if (fileNameEntered.length > 0) {
+  filename = fileNameEntered[0];
+}
+let tasks = loadingData(filename);
 function list(){
   console.log('The Tasks Are:') ;
   tasks.forEach((tasks , index) => {
@@ -210,9 +216,12 @@ function removeTask(index){
   }
 }
 function savingTheData(filename, tasks) {
-  fs.writeFileSync(filename, JSON.stringify(tasks, null, 2), 'utf-8');
-  console.log(`Data saved to ${filename}`);
-}
+  try {
+    fs.writeFileSync(filename, JSON.stringify(tasks, null, 2), 'utf-8');
+    console.log(`Data is saved to ${filename}`);
+  } catch (error) {
+    console.error(`Error saving the data to ${filename}`);
+  }
 function loadingData(filename) {
   try {
     const jsonData = fs.readFileSync(filename, 'utf-8');
